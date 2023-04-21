@@ -7,6 +7,7 @@ const cleanData = (data) => {
   const ataque = data.stats && Array.isArray(data.stats) ? data.stats.find(s => s.stat.name === 'attack').base_stat : '';
   const defensa = data.stats && Array.isArray(data.stats) ? data.stats.find(s => s.stat.name === 'defense').base_stat : '';
   const velocidad = data.stats && Array.isArray(data.stats) ? data.stats.find(s => s.stat.name === 'speed').base_stat : '';
+  const tipos = data.types && Array.isArray(data.types) ? data.types.map(t => t.type.name) : [];
   return {
     id: data.id,
     name: data.name,
@@ -17,6 +18,7 @@ const cleanData = (data) => {
     velocidad,
     altura: data.height,
     peso: data.weight,
+    tipos,
     isDB: false,
   };
 };

@@ -11,8 +11,8 @@ const router = Router();
 
 router.use("/", pokemonRouter);
 router.use("/pokemon", pokemonRouter);
-router.use("/dogs/:idRaza", pokemonRouter);
-router.use("/dogs", pokemonRouter);
+router.use("/pokemon/:idPokemon", pokemonRouter);
+router.use("/pokemon", pokemonRouter);
 router.use("/temperaments", pokemonRouter);
 
 module.exports = router;
