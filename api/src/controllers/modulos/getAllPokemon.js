@@ -33,4 +33,4 @@ const getAllPokemon = async () => {
   return [...databasepokemon, ...apiPokemonCleaned];
 };
 
-module.exports = { getAllPokemon }
+module.exports = { getAllPokemon, cleanData }
