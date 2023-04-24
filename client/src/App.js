@@ -1,11 +1,23 @@
-import './App.css';
+import { Home, Detail, Form, LandingPage } from "./views/index"
+import { Route, Routes, useLocation } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
+  const { pathname } = useLocation();
+
   return (
-    <div className="App">
-      <h1>Henry Pokemon</h1>
-    </div>
+    <>
+      {pathname !== "/" && <NavBar />}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Detail" element={<Detail />} />
+        <Route path="/Form" element={<Form />} />
+      </Routes>
+
+    </>
   );
 }
 
 export default App;
+
