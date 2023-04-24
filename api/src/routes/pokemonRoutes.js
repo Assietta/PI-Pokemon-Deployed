@@ -16,7 +16,7 @@ pokemonRouter.get("/pokemon", getPokemonHandler);
 
 pokemonRouter.get("/pokemon/:idPokemon", getIdPokemonHandler);
 
-pokemonRouter.get("/pokemon/name", getNameHandler);
+pokemonRouter.get("/pokemon/name/:name", getNameHandler);
 
 pokemonRouter.post("/pokemon", postPokemonHandler);
 
