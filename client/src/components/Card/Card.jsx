@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import style from "./Card.module.css"
+import { Link } from 'react-router-dom';
 
 export default function Card({ id, name, vida, ataque, defensa, velocidad, altura, peso, tipos, isDB, imagen }) {
    const [isFlipped, setIsFlipped] = useState(false);
@@ -7,6 +8,7 @@ export default function Card({ id, name, vida, ataque, defensa, velocidad, altur
    
 
    return (
+   <Link to={`/detail/${id}`}>
       <div className={`${style.card} ${isFlipped ? style.flipped : ""}`} onMouseEnter={() => setIsFlipped(true)} onMouseLeave={() => setIsFlipped(false)}>
          <div className={style.front}>
             <div className={style.imageContainer}>
@@ -15,13 +17,13 @@ export default function Card({ id, name, vida, ataque, defensa, velocidad, altur
                   alt={imagen} 
                   className={imageLoaded ? style.imageLoaded : style.image} 
                   onLoad={() => setImageLoaded(true)}
-               />
+                  />
             </div>
             <h2 className={style.name}>{name}</h2>
             <div className={style.types}>
                {tipos.map((tipo) => (
                   <span key={tipo} className={style.tipo}>{tipo}</span>
-               ))}
+                  ))}
             </div>
          </div>
          <div className={style.back}>
@@ -53,5 +55,6 @@ export default function Card({ id, name, vida, ataque, defensa, velocidad, altur
             </div>
          </div>
       </div>
+   </Link>
    );
 }

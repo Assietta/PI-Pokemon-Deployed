@@ -10,6 +10,7 @@ export default function Cards() {
          {
             pokemons.map(({ id, name, vida, ataque, defensa, velocidad, altura, peso, tipos, isDB, imagen}) => {
                return <Card
+                  id={id}
                   key={id}
                   name={name}
                   vida={vida}
