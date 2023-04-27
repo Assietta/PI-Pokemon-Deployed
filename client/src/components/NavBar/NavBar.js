@@ -8,16 +8,16 @@ function NavBar() {
       <nav>
         <ul className={style.navlist}>
           <li>
-            <NavLink to="/" exact activeClassName="active">Home</NavLink>
+            <NavLink to="/" exact activeClassName="active">LandingPage</NavLink>
           </li>
           <li>
             <NavLink to="/Home" activeClassName="active">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/Detail" activeClassName="active">Detail</NavLink>
+            <NavLink to="/Details" activeClassName="active">Detail</NavLink>
           </li>
           <li>
-            <NavLink to="/Form" activeClassName="active">Form</NavLink>
+            <NavLink to="/Forms" activeClassName="active">Form</NavLink>
           </li>
         </ul>
       </nav>
