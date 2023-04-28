@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getID } from "../../redux/actions";
+import style from './Detail.module.css'
 
 const Detail = () => {
     const { id } = useParams();
@@ -16,7 +17,7 @@ const Detail = () => {
     if ( typeof (pokemon) === 'object' ) {
         
         return (
-            <div>
+            <div className={style.pokemondetail}>
             <h2>{pokemon.name}</h2>
             <p>HP: {pokemon.vida}</p>
             <p>Attack: {pokemon.ataque}</p>

@@ -14,9 +14,6 @@ function NavBar() {
             <NavLink to="/Home" activeClassName="active">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/Details" activeClassName="active">Detail</NavLink>
-          </li>
-          <li>
             <NavLink to="/Forms" activeClassName="active">Form</NavLink>
           </li>
         </ul>
