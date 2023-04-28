@@ -3,6 +3,7 @@ import axios from 'axios'
 export const GET_POKEMONS = "GET_POKEMONS"
 export const GET_TYPES = 'GET_TYPES'
 export const GET_ID = 'GET_ID'
+export const GET_NAME = 'GET_NAME'
 
 export function getPokemons(){
     return async function (dispatch){
@@ -39,6 +40,20 @@ export function getID(id){
             dispatch({
                 type: GET_ID,
                 payload: response.data
+            })
+        } catch (error) {
+            console.error("Error while getting types:", error);
+        }
+    }
+}
+
+export function getName(name){
+    return async function (dispatch){
+        try {
+            const response = await axios.get(`http://localhost:3001/pokemon/${name}`);
+            dispatch({
+                type: GET_NAME,
+                payload: response.data[0] // get the first object in the response array
             })
         } catch (error) {
             console.error("Error while getting types:", error);
