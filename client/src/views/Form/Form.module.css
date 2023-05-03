@@ -1,0 +1,45 @@
+.newpokemonform {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .newpokemonform label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .newpokemonform input[type="text"],
+  .newpokemonform input[type="url"],
+  .newpokemonform input[type="number"],
+  .newpokemonform select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .newpokemonform select {
+    height: 100px;
+  }
+  
+  .newpokemonform button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .newpokemonform button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
