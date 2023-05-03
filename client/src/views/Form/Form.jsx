@@ -62,6 +62,21 @@ const Form = () => {
         };
       }, []);
       
+      const handleTypeChange = (event) => {
+        const selectedTypes = Array.from(document.querySelectorAll('input[name=type]:checked'))
+          .map(input => input.value);
+        
+        if (selectedTypes.length >= 2) {
+          document.querySelectorAll('input[name=type]:not(:checked)').forEach(input => {
+            input.disabled = true;
+          });
+        } else {
+          document.querySelectorAll('input[name=type]:not(:checked)').forEach(input => {
+            input.disabled = false;
+          });
+        }
+      };
+      
 
     return (
       <>
@@ -93,83 +108,83 @@ const Form = () => {
             <label htmlFor="types">Tipo(s):</label>
 <div className={style.types}>
   <label>
-    <input type="checkbox" name="types" value="normal" />
+    <input type="checkbox" name="type" value="normal" onChange={handleTypeChange}/>
     Normal
   </label>
   <label>
-    <input type="checkbox" name="types" value="fighting" />
+    <input type="checkbox" name="type" value="fighting" onChange={handleTypeChange}/>
     Fighting
   </label>
   <label>
-    <input type="checkbox" name="types" value="flying" />
+    <input type="checkbox" name="type" value="flying" onChange={handleTypeChange}/>
     Flying
   </label>
   <label>
-    <input type="checkbox" name="types" value="poison" />
+    <input type="checkbox" name="type" value="poison" onChange={handleTypeChange}/>
     Poison
   </label>
   <label>
-    <input type="checkbox" name="types" value="ground" />
+    <input type="checkbox" name="type" value="ground" onChange={handleTypeChange}/>
     Ground
   </label>
   <label>
-    <input type="checkbox" name="types" value="rock" />
+    <input type="checkbox" name="type" value="rock" onChange={handleTypeChange}/>
     Rock
   </label>
   <label>
-    <input type="checkbox" name="types" value="bug" />
+    <input type="checkbox" name="type" value="bug" onChange={handleTypeChange}/>
     Bug
   </label>
   <label>
-    <input type="checkbox" name="types" value="ghost" />
+    <input type="checkbox" name="type" value="ghost" onChange={handleTypeChange}/>
     Ghost
   </label>
   <label>
-    <input type="checkbox" name="types" value="steel" />
+    <input type="checkbox" name="type" value="steel" onChange={handleTypeChange}/>
     Steel
   </label>
   <label>
-    <input type="checkbox" name="types" value="fire" />
+    <input type="checkbox" name="type" value="fire" onChange={handleTypeChange}/>
     Fire
   </label>
   <label>
-    <input type="checkbox" name="types" value="water" />
+    <input type="checkbox" name="type" value="water" onChange={handleTypeChange}/>
     Water
   </label>
   <label>
-    <input type="checkbox" name="types" value="grass" />
+    <input type="checkbox" name="type" value="grass" onChange={handleTypeChange}/>
     Grass
   </label>
   <label>
-    <input type="checkbox" name="types" value="electric" />
+    <input type="checkbox" name="type" value="electric" onChange={handleTypeChange}/>
     Electric
   </label>
   <label>
-    <input type="checkbox" name="types" value="psychic" />
+    <input type="checkbox" name="type" value="psychic" onChange={handleTypeChange}/>
     Psychic
   </label>
   <label>
-    <input type="checkbox" name="types" value="ice" />
+    <input type="checkbox" name="type" value="ice" onChange={handleTypeChange}/>
     Ice
   </label>
   <label>
-    <input type="checkbox" name="types" value="dragon" />
+    <input type="checkbox" name="type" value="dragon" onChange={handleTypeChange}/>
     Dragon
   </label>
   <label>
-    <input type="checkbox" name="types" value="dark" />
+    <input type="checkbox" name="type" value="dark" onChange={handleTypeChange}/>
     Dark
   </label>
   <label>
-    <input type="checkbox" name="types" value="fairy" />
+    <input type="checkbox" name="type" value="fairy" onChange={handleTypeChange}/>
     Fairy
   </label>
   <label>
-    <input type="checkbox" name="types" value="unknown" />
+    <input type="checkbox" name="type" value="unknown" onChange={handleTypeChange}/>
     Unknown
   </label>
   <label>
-    <input type="checkbox" name="types" value="shadow" />
+    <input type="checkbox" name="type" value="shadow" onChange={handleTypeChange}/>
     Shadow
   </label>
 </div>
