@@ -1,4 +1,4 @@
-import { GET_POKEMONS, GET_TYPES, GET_ID, GET_NAME } from "./actions";
+import { GET_POKEMONS, GET_TYPES, GET_ID, GET_NAME, POST_POKEMON } from "./actions";
 
 const initialState = {
     pokemons: [],
@@ -24,6 +24,10 @@ const initialState = {
         case GET_NAME:
         return {...state,
             pokemonsNAME: action.payload,
+              };
+        case POST_POKEMON:
+        return {...state,
+            pokemons: action.payload,
               };
         default:
               return { ...state };

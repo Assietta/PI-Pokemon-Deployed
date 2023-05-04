@@ -1,59 +1,48 @@
 import style from './Form.module.css'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { postPokemon } from '../../redux/actions';
 // className={style.}
 
 const Form = () => {
+  const dispatch = useDispatch();
+
     useEffect(() => {
         const form = document.getElementById('new-pokemon-form');
-      
+
         const handleSubmit = (event) => {
-          event.preventDefault(); // evita que se envíe el formulario
+          event.preventDefault(); 
       
-          // Obtener los valores de los campos
           const name = document.getElementById('name').value;
-          const image = document.getElementById('image').value;
-          const life = parseInt(document.getElementById('life').value);
-          const attack = parseInt(document.getElementById('attack').value);
-          const defense = parseInt(document.getElementById('defense').value);
-          const speed = parseInt(document.getElementById('speed').value);
-          const height = parseInt(document.getElementById('height').value);
-          const weight = parseInt(document.getElementById('weight').value);
-          const types = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+          const imagen = document.getElementById('imagen').value;
+          const vida = parseInt(document.getElementById('vida').value);
+          const ataque = parseInt(document.getElementById('ataque').value);
+          const defensa = parseInt(document.getElementById('defensa').value);
+          const velocidad = parseInt(document.getElementById('velocidad').value);
+          const altura = parseInt(document.getElementById('altura').value);
+          const peso = parseInt(document.getElementById('peso').value);
+          const type = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
             .map(checkbox => checkbox.value);
 
+          document.getElementById('new-pokemon-form').reset();
       
-          // Realizar las validaciones necesarias
-          if (!/^[a-zA-Z]+$/.test(name)) {
-            alert('El nombre del Pokemon no debe contener números');
-            return;
-          }
-      
-          if (defense > 100) {
-            alert('La defensa no puede exceder el valor de 100');
-            return;
-          }
+          
+          const pokemonData = {
+            name,
+            imagen,
+            vida,
+            ataque,
+            defensa,
+            velocidad,
+            altura,
+            peso,
+            type,
+          };
+          dispatch(postPokemon(pokemonData));
+          console.log(pokemonData);
+          };
 
-          if (types.length === 0) {
-            alert('Debe seleccionar al menos un tipo de Pokemon');
-            return;
-          }
-    
-          if (types.length > 2) {
-            alert('Solo se pueden seleccionar hasta dos tipos de Pokemon');
-            return;
-          }
-      
-          // Enviar los datos al servidor (aquí iría el código para hacer la petición AJAX)
-          console.log('Nombre:', name);
-          console.log('Imagen:', image);
-          console.log('Vida:', life);
-          console.log('Ataque:', attack);
-          console.log('Defensa:', defense);
-          console.log('Velocidad:', speed);
-          console.log('Altura:', height);
-          console.log('Peso:', weight);
-          console.log('types:', types);
-        };
+
       
         form.addEventListener('submit', handleSubmit);
       
@@ -63,10 +52,10 @@ const Form = () => {
       }, []);
       
       const handleTypeChange = (event) => {
-        const selectedTypes = Array.from(document.querySelectorAll('input[name=type]:checked'))
+        const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked'))
           .map(input => input.value);
         
-        if (selectedTypes.length >= 2) {
+        if (selectedtype.length >= 2) {
           document.querySelectorAll('input[name=type]:not(:checked)').forEach(input => {
             input.disabled = true;
           });
@@ -84,29 +73,29 @@ const Form = () => {
             <label for="name">Nombre:</label>
             <input type="text" id="name" name="name" required />
 
-            <label for="image">Imagen:</label>
-            <input type="url" id="image" name="image" required/>
+            <label for="imagen">imagen:</label>
+            <input type="url" id="imagen" name="imagen" required/>
 
-            <label for="life">Vida:</label>
-            <input type="number" id="life" name="life" min="1" max="100" required/>
+            <label for="vida">Vida:</label>
+            <input type="number" id="vida" name="vida" min="1" max="100" required/>
 
-            <label for="attack">Ataque:</label>
-            <input type="number" id="attack" name="attack" min="1" max="100" required/>
+            <label for="ataque">Ataque:</label>
+            <input type="number" id="ataque" name="ataque" min="1" max="100" required/>
 
-            <label for="defense">Defensa:</label>
-            <input type="number" id="defense" name="defense" min="1" max="100" required/>
+            <label for="defensa">Defensa:</label>
+            <input type="number" id="defensa" name="defensa" min="1" max="100" required/>
 
-            <label for="speed">Velocidad:</label>
-            <input type="number" id="speed" name="speed" min="1" max="100"/>
+            <label for="velocidad">Velocidad:</label>
+            <input type="number" id="velocidad" name="velocidad" min="1" max="100"/>
 
-            <label for="height">Altura:</label>
-            <input type="number" id="height" name="height" min="1" max="10"/>
+            <label for="altura">Altura:</label>
+            <input type="number" id="altura" name="altura" min="1" max="10"/>
 
-            <label for="weight">Peso:</label>
-            <input type="number" id="weight" name="weight" min="1" max="1000"/>
+            <label for="peso">Peso:</label>
+            <input type="number" id="peso" name="peso" min="1" max="1000"/>
 
-            <label htmlFor="types">Tipo(s):</label>
-<div className={style.types}>
+            <label htmlFor="type">Tipo(s):</label>
+<div className={style.type}>
   <label>
     <input type="checkbox" name="type" value="normal" onChange={handleTypeChange}/>
     Normal

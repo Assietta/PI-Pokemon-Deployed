@@ -4,6 +4,7 @@ export const GET_POKEMONS = "GET_POKEMONS"
 export const GET_TYPES = 'GET_TYPES'
 export const GET_ID = 'GET_ID'
 export const GET_NAME = 'GET_NAME'
+export const POST_POKEMON = 'POST_POKEMON'
 
 export function getPokemons(){
     return async function (dispatch){
@@ -54,6 +55,20 @@ export function getName(name){
             dispatch({
                 type: GET_NAME,
                 payload: response.data[0] // get the first object in the response array
+            })
+        } catch (error) {
+            console.error("Error while getting types:", error);
+        }
+    }
+}
+
+export function postPokemon(){
+    return async function (dispatch){
+        try {
+            const response = await axios.post(`http://localhost:3001/pokemon}`);
+            dispatch({
+                type: POST_POKEMON,
+                payload: response.data // get the first object in the response array
             })
         } catch (error) {
             console.error("Error while getting types:", error);
