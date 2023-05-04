@@ -10,6 +10,8 @@
     transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ 
+
   }
   
   .card:hover {
@@ -52,12 +54,13 @@
     margin-bottom: 20px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
   }
   
   .image {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
   
   .imageLoaded {

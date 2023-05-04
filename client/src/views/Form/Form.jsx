@@ -16,7 +16,7 @@ const Form = () => {
     velocidad: 0,
     altura: 0,
     peso: 0,
-    type: [],
+    tipos: ['', ''],
   });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { name, imagen, vida, ataque, defensa, velocidad, altura, peso, type } = input;
+    const { name, imagen, vida, ataque, defensa, velocidad, altura, peso, tipos } = input;
     const pokemonData = {
       name,
       imagen,
@@ -35,7 +35,7 @@ const Form = () => {
       velocidad,
       altura,
       peso,
-      type: type.join(", "),
+      tipos: tipos,
     };
     dispatch(postPokemon(pokemonData));
     console.log(pokemonData);
@@ -56,7 +56,7 @@ const Form = () => {
 
     setInput({
       ...input,
-      type: selectedtype,
+      tipos: selectedtype,
     });
   };
 
@@ -79,32 +79,33 @@ const Form = () => {
           <input value={input.imagen} type="url" id="imagen" name="imagen" required onChange={handleInputChange} />
         
           <label htmlFor="vida">Vida:</label>
-          <input value={input.vida} type="number" id="vida" name="vida" min="1" max="100" required onChange={handleInputChange} />
+          <input value={input.vida} type="number" id="vida" name="vida" min="0" max="100" required onChange={handleInputChange} />
     
           <label htmlFor="ataque">Ataque:</label>
-          <input value={input.ataque} type="number" id="ataque" name="ataque" min="1" max="100" required onChange={handleInputChange} />
+          <input value={input.ataque} type="number" id="ataque" name="ataque" min="0" max="100" required onChange={handleInputChange} />
         
           <label htmlFor="defensa">Defensa:</label>
-          <input value={input.defensa} type="number" id="defensa" name="defensa" min="1" max="100" required onChange={handleInputChange} />
+          <input value={input.defensa} type="number" id="defensa" name="defensa" min="0" max="100" required onChange={handleInputChange} />
         
           <label htmlFor="velocidad">Velocidad:</label>
-          <input value={input.velocidad === null ? "" : input.velocidad} type="number" id="velocidad" name="velocidad" min="1" max="100" onChange={handleInputChange} />
+          <input value={input.velocidad === null ? "" : input.velocidad} type="number" id="velocidad" name="velocidad" min="0" max="100" onChange={handleInputChange} />
         
           <label htmlFor="altura">Altura:</label>
-          <input value={input.altura} type="number" id="altura" name="altura" min="1" max="10" onChange={handleInputChange} />
+          <input value={input.altura} type="number" id="altura" name="altura" min="0" max="10" onChange={handleInputChange} />
         
           <label htmlFor="peso">Peso:</label>
-          <input value={input.peso} type="number" id="peso" name="peso" min="1" max="1000" onChange={handleInputChange} />
+          <input value={input.peso} type="number" id="peso" name="peso" min="0" max="1000" onChange={handleInputChange} />
         
           <label htmlFor="type">Tipo(s):</label>
             <div className={style.type}>
               {types.map((type) => (
                 <label key={type}>
-                  <input type="checkbox" name="type" value={type} checked={input.type.includes(type)} onChange={handleTypeChange} />
+                  <input type="checkbox" name="type" value={type} checked={input.tipos.includes(type)} onChange={handleTypeChange} />
                   {type.charAt(0).toUpperCase() + type.slice(1)}
                 </label>
               ))}
             </div>
+
     
           <button type="submit" id="submit-button">Crear Pokemon</button>
       </form>
