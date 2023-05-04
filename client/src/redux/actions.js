@@ -62,16 +62,21 @@ export function getName(name){
     }
 }
 
-export function postPokemon(){
+export function postPokemon(pokemonData){
     return async function (dispatch){
+
         try {
-            const response = await axios.post(`http://localhost:3001/pokemon}`);
+            const response = await axios.post(`http://localhost:3001/pokemon`, pokemonData);
+            console.log(response.data)
             dispatch({
                 type: POST_POKEMON,
-                payload: response.data // get the first object in the response array
+                payload: response.data
             })
+            console.log(pokemonData)
         } catch (error) {
-            console.error("Error while getting types:", error);
+            console.error("Error while posting pokemon:", error.response.data.message);
+            console.log(error.message);
+
         }
     }
 }

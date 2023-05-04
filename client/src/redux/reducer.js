@@ -26,7 +26,7 @@ const initialState = {
             pokemonsNAME: action.payload,
               };
         case POST_POKEMON:
-        return {...state,
+          return {...state,
             pokemons: action.payload,
               };
         default:

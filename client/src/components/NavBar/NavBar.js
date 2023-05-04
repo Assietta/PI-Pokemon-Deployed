@@ -8,13 +8,13 @@ function NavBar() {
       <nav>
         <ul className={style.navlist}>
           <li>
-            <NavLink to="/" exact activeClassName="active">LandingPage</NavLink>
+            <NavLink to="/"  activeclassname="active">LandingPage</NavLink>
           </li>
           <li>
-            <NavLink to="/Home" activeClassName="active">Home</NavLink>
+            <NavLink to="/Home" activeclassname="active">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/Forms" activeClassName="active">Form</NavLink>
+            <NavLink to="/Forms" activeclassname="active">Form</NavLink>
           </li>
         </ul>
       </nav>

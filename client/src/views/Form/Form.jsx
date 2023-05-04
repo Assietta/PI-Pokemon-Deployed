@@ -1,59 +1,52 @@
 import style from './Form.module.css'
-import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { postPokemon } from '../../redux/actions';
+import { useEffect } from 'react';
 // className={style.}
 
 const Form = () => {
   const dispatch = useDispatch();
 
-    useEffect(() => {
-        const form = document.getElementById('new-pokemon-form');
+  useEffect(() => {
+    const form = document.getElementById('new-pokemon-form');
 
-        const handleSubmit = (event) => {
-          event.preventDefault(); 
-      
-          const name = document.getElementById('name').value;
-          const imagen = document.getElementById('imagen').value;
-          const vida = parseInt(document.getElementById('vida').value);
-          const ataque = parseInt(document.getElementById('ataque').value);
-          const defensa = parseInt(document.getElementById('defensa').value);
-          const velocidad = parseInt(document.getElementById('velocidad').value);
-          const altura = parseInt(document.getElementById('altura').value);
-          const peso = parseInt(document.getElementById('peso').value);
-          const type = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-            .map(checkbox => checkbox.value);
+    const handleSubmit = (event) => {
+      event.preventDefault(); 
 
-          document.getElementById('new-pokemon-form').reset();
-      
-          
-          const pokemonData = {
-            name,
-            imagen,
-            vida,
-            ataque,
-            defensa,
-            velocidad,
-            altura,
-            peso,
-            type,
-          };
-          dispatch(postPokemon(pokemonData));
-          console.log(pokemonData);
-          };
+      const name = document.getElementById('name').value;
+      const imagen = document.getElementById('imagen').value;
+      const vida = parseInt(document.getElementById('vida').value);
+      const ataque = parseInt(document.getElementById('ataque').value);
+      const defensa = parseInt(document.getElementById('defensa').value);
+      const velocidad = parseInt(document.getElementById('velocidad').value);
+      const altura = parseInt(document.getElementById('altura').value);
+      const peso = parseInt(document.getElementById('peso').value);
+      const type = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(checkbox => checkbox.value);
+
+      // document.getElementById('new-pokemon-form').reset();
 
 
-      
-        form.addEventListener('submit', handleSubmit);
-      
-        return () => {
-          form.removeEventListener('submit', handleSubmit);
-        };
-      }, []);
+      const pokemonData = {
+        name,
+        imagen,
+        vida,
+        ataque,
+        defensa,
+        velocidad,
+        altura,
+        peso,
+        type,
+      };
+      dispatch(postPokemon(pokemonData));
+      console.log(pokemonData);
+    };
+    form.addEventListener('submit', handleSubmit);
+    });
       
       const handleTypeChange = (event) => {
         const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked'))
-          .map(input => input.value);
+        .map(input => input.value);
         
         if (selectedtype.length >= 2) {
           document.querySelectorAll('input[name=type]:not(:checked)').forEach(input => {
@@ -66,32 +59,31 @@ const Form = () => {
         }
       };
       
-
     return (
       <>
         <form id="new-pokemon-form" className={style.newpokemonform}>
-            <label for="name">Nombre:</label>
+            <label htmlFor="name">Nombre:</label>
             <input type="text" id="name" name="name" required />
 
-            <label for="imagen">imagen:</label>
+            <label htmlFor="imagen">imagen:</label>
             <input type="url" id="imagen" name="imagen" required/>
 
-            <label for="vida">Vida:</label>
+            <label htmlFor="vida">Vida:</label>
             <input type="number" id="vida" name="vida" min="1" max="100" required/>
 
-            <label for="ataque">Ataque:</label>
+            <label htmlFor="ataque">Ataque:</label>
             <input type="number" id="ataque" name="ataque" min="1" max="100" required/>
 
-            <label for="defensa">Defensa:</label>
+            <label htmlFor="defensa">Defensa:</label>
             <input type="number" id="defensa" name="defensa" min="1" max="100" required/>
 
-            <label for="velocidad">Velocidad:</label>
+            <label htmlFor="velocidad">Velocidad:</label>
             <input type="number" id="velocidad" name="velocidad" min="1" max="100"/>
 
-            <label for="altura">Altura:</label>
+            <label htmlFor="altura">Altura:</label>
             <input type="number" id="altura" name="altura" min="1" max="10"/>
 
-            <label for="peso">Peso:</label>
+            <label htmlFor="peso">Peso:</label>
             <input type="number" id="peso" name="peso" min="1" max="1000"/>
 
             <label htmlFor="type">Tipo(s):</label>
