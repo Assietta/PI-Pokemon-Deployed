@@ -1,180 +1,114 @@
-import style from './Form.module.css'
-import { useDispatch } from "react-redux";
-import { postPokemon } from '../../redux/actions';
-import { useEffect } from 'react';
-// className={style.}
+import style from './Form.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { postPokemon, getTypes } from '../../redux/actions';
+import React, { useEffect, useState } from 'react';
 
 const Form = () => {
   const dispatch = useDispatch();
+  const types = useSelector((state) => state.types);
+
+  const [input, setInput] = useState({
+    name: '',
+    imagen: '',
+    vida: 0,
+    ataque: 0,
+    defensa: 0,
+    velocidad: 0,
+    altura: 0,
+    peso: 0,
+    type: [],
+  });
 
   useEffect(() => {
-    const form = document.getElementById('new-pokemon-form');
+    dispatch(getTypes());
+  }, [dispatch]);
 
-    const handleSubmit = (event) => {
-      event.preventDefault(); 
-
-      const name = document.getElementById('name').value;
-      const imagen = document.getElementById('imagen').value;
-      const vida = parseInt(document.getElementById('vida').value);
-      const ataque = parseInt(document.getElementById('ataque').value);
-      const defensa = parseInt(document.getElementById('defensa').value);
-      const velocidad = parseInt(document.getElementById('velocidad').value);
-      const altura = parseInt(document.getElementById('altura').value);
-      const peso = parseInt(document.getElementById('peso').value);
-      const type = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-        .map(checkbox => checkbox.value);
-
-      // document.getElementById('new-pokemon-form').reset();
-
-
-      const pokemonData = {
-        name,
-        imagen,
-        vida,
-        ataque,
-        defensa,
-        velocidad,
-        altura,
-        peso,
-        type,
-      };
-      dispatch(postPokemon(pokemonData));
-      console.log(pokemonData);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { name, imagen, vida, ataque, defensa, velocidad, altura, peso, type } = input;
+    const pokemonData = {
+      name,
+      imagen,
+      vida,
+      ataque,
+      defensa,
+      velocidad,
+      altura,
+      peso,
+      type: type.join(", "),
     };
-    form.addEventListener('submit', handleSubmit);
+    dispatch(postPokemon(pokemonData));
+    console.log(pokemonData);
+  };
+
+  const handleTypeChange = (event) => {
+    const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked')).map((input) => input.value);
+
+    if (selectedtype.length >= 2) {
+      document.querySelectorAll('input[name=type]:not(:checked)').forEach((input) => {
+        input.disabled = true;
+      });
+    } else {
+      document.querySelectorAll('input[name=type]:not(:checked)').forEach((input) => {
+        input.disabled = false;
+      });
+    }
+
+    setInput({
+      ...input,
+      type: selectedtype,
     });
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setInput({
+      ...input,
+      [name]: value,
+    });
+  };
       
-      const handleTypeChange = (event) => {
-        const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked'))
-        .map(input => input.value);
+  return (
+    <>
+      <form id="new-pokemon-form" className={style.newpokemonform} onSubmit={handleSubmit}>
+          <label htmlFor="name">Nombre:</label>
+          <input value={input.name} type="text" id="name" name="name" required onChange={handleInputChange} />
+  
+          <label htmlFor="imagen">imagen:</label>
+          <input value={input.imagen} type="url" id="imagen" name="imagen" required onChange={handleInputChange} />
         
-        if (selectedtype.length >= 2) {
-          document.querySelectorAll('input[name=type]:not(:checked)').forEach(input => {
-            input.disabled = true;
-          });
-        } else {
-          document.querySelectorAll('input[name=type]:not(:checked)').forEach(input => {
-            input.disabled = false;
-          });
-        }
-      };
-      
-    return (
-      <>
-        <form id="new-pokemon-form" className={style.newpokemonform}>
-            <label htmlFor="name">Nombre:</label>
-            <input type="text" id="name" name="name" required />
-
-            <label htmlFor="imagen">imagen:</label>
-            <input type="url" id="imagen" name="imagen" required/>
-
-            <label htmlFor="vida">Vida:</label>
-            <input type="number" id="vida" name="vida" min="1" max="100" required/>
-
-            <label htmlFor="ataque">Ataque:</label>
-            <input type="number" id="ataque" name="ataque" min="1" max="100" required/>
-
-            <label htmlFor="defensa">Defensa:</label>
-            <input type="number" id="defensa" name="defensa" min="1" max="100" required/>
-
-            <label htmlFor="velocidad">Velocidad:</label>
-            <input type="number" id="velocidad" name="velocidad" min="1" max="100"/>
-
-            <label htmlFor="altura">Altura:</label>
-            <input type="number" id="altura" name="altura" min="1" max="10"/>
-
-            <label htmlFor="peso">Peso:</label>
-            <input type="number" id="peso" name="peso" min="1" max="1000"/>
-
-            <label htmlFor="type">Tipo(s):</label>
-<div className={style.type}>
-  <label>
-    <input type="checkbox" name="type" value="normal" onChange={handleTypeChange}/>
-    Normal
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="fighting" onChange={handleTypeChange}/>
-    Fighting
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="flying" onChange={handleTypeChange}/>
-    Flying
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="poison" onChange={handleTypeChange}/>
-    Poison
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="ground" onChange={handleTypeChange}/>
-    Ground
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="rock" onChange={handleTypeChange}/>
-    Rock
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="bug" onChange={handleTypeChange}/>
-    Bug
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="ghost" onChange={handleTypeChange}/>
-    Ghost
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="steel" onChange={handleTypeChange}/>
-    Steel
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="fire" onChange={handleTypeChange}/>
-    Fire
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="water" onChange={handleTypeChange}/>
-    Water
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="grass" onChange={handleTypeChange}/>
-    Grass
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="electric" onChange={handleTypeChange}/>
-    Electric
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="psychic" onChange={handleTypeChange}/>
-    Psychic
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="ice" onChange={handleTypeChange}/>
-    Ice
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="dragon" onChange={handleTypeChange}/>
-    Dragon
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="dark" onChange={handleTypeChange}/>
-    Dark
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="fairy" onChange={handleTypeChange}/>
-    Fairy
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="unknown" onChange={handleTypeChange}/>
-    Unknown
-  </label>
-  <label>
-    <input type="checkbox" name="type" value="shadow" onChange={handleTypeChange}/>
-    Shadow
-  </label>
-</div>
-
-
-            <button type="submit" id="submit-button">Crear Pokemon</button>
-        </form>     
-
-      </>
+          <label htmlFor="vida">Vida:</label>
+          <input value={input.vida} type="number" id="vida" name="vida" min="1" max="100" required onChange={handleInputChange} />
+    
+          <label htmlFor="ataque">Ataque:</label>
+          <input value={input.ataque} type="number" id="ataque" name="ataque" min="1" max="100" required onChange={handleInputChange} />
+        
+          <label htmlFor="defensa">Defensa:</label>
+          <input value={input.defensa} type="number" id="defensa" name="defensa" min="1" max="100" required onChange={handleInputChange} />
+        
+          <label htmlFor="velocidad">Velocidad:</label>
+          <input value={input.velocidad === null ? "" : input.velocidad} type="number" id="velocidad" name="velocidad" min="1" max="100" onChange={handleInputChange} />
+        
+          <label htmlFor="altura">Altura:</label>
+          <input value={input.altura} type="number" id="altura" name="altura" min="1" max="10" onChange={handleInputChange} />
+        
+          <label htmlFor="peso">Peso:</label>
+          <input value={input.peso} type="number" id="peso" name="peso" min="1" max="1000" onChange={handleInputChange} />
+        
+          <label htmlFor="type">Tipo(s):</label>
+            <div className={style.type}>
+              {types.map((type) => (
+                <label key={type}>
+                  <input type="checkbox" name="type" value={type} checked={input.type.includes(type)} onChange={handleTypeChange} />
+                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                </label>
+              ))}
+            </div>
+    
+          <button type="submit" id="submit-button">Crear Pokemon</button>
+      </form>
+    </>
     );
   };
   

@@ -66,7 +66,11 @@ export function postPokemon(pokemonData){
     return async function (dispatch){
 
         try {
-            const response = await axios.post(`http://localhost:3001/pokemon`, pokemonData);
+            const response = await axios.post("http://localhost:3001/pokemon", JSON.stringify(pokemonData), {
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              });
             console.log(response.data)
             dispatch({
                 type: POST_POKEMON,
@@ -80,3 +84,4 @@ export function postPokemon(pokemonData){
         }
     }
 }
+
