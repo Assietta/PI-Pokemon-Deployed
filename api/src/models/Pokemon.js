@@ -1,53 +1,53 @@
 const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+
+
 module.exports = (sequelize) => {
-  // defino el modelo
   sequelize.define('pokemon', {
-    id : {
-      type: DataTypes.STRING,
+    id: {
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     imagen: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+      type: DataTypes.STRING,
+      allowNull: true
     },
     vida: {
-      type: DataTypes.STRING,
-      unique: false,
+      type: DataTypes.INTEGER,
+      unique: false
     },
     ataque: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     defensa: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     velocidad: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     altura: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     peso: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: true,
+    tipos: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true
     },
     isDB: {
-      type: DataTypes.BOOLEAN,
-    },
-  },
-    { timestamps: false })
+      type: DataTypes.BOOLEAN
+    }
+  }, {
+    timestamps: false,
+  });
 };
