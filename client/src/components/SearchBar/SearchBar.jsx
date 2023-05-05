@@ -5,7 +5,7 @@ import { getName } from "../../redux/actions";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-  const pokemonsNAME = useSelector((state) => state.pokemonsNAME);
+  const pokemons = useSelector((state) => state.pokemons);
 
   useEffect(() => {
     if (name) {
@@ -26,11 +26,11 @@ const SearchBar = () => {
     <form onSubmit={handleSearch}>
       <input type="text" value={name} onChange={handleInputChange} />
       <button type="submit">Search</button>
-      {pokemonsNAME &&
-        pokemonsNAME.name &&
+      {pokemons &&
+        pokemons.name &&
         <div>
-          <h3>{pokemonsNAME.name}</h3>
-          <img src={pokemonsNAME.img} alt={pokemonsNAME.name} />
+          <h3>{pokemons.name}</h3>
+          <img src={pokemons.img} alt={pokemons.name} />
         </div>
       }
     </form>

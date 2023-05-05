@@ -51,10 +51,10 @@ export function getID(id){
 export function getName(name){
     return async function (dispatch){
         try {
-            const response = await axios.get(`http://localhost:3001/pokemon/${name}`);
+            const response = await axios.get(`http://localhost:3001/pokemon/name/${name}`);
             dispatch({
                 type: GET_NAME,
-                payload: response.data[0] // get the first object in the response array
+                payload: response.data // get the first object in the response array
             })
         } catch (error) {
             console.error("Error while getting types:", error);

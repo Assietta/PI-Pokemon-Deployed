@@ -23,7 +23,7 @@ const initialState = {
               };
         case GET_NAME:
         return {...state,
-            pokemonsNAME: action.payload,
+            pokemons: action.payload,
               };
         case POST_POKEMON:
           return {...state,

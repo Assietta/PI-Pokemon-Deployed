@@ -2,16 +2,15 @@ const axios = require('axios')
 const { pokemon } = require('../../db')
 const { cleanData } = require('../helpers/cleanData')
 
- 
-
 const getName = async (name) => {
   try {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
     const data = response.data;
-    const pokemon = cleanData(data);
-    return [pokemon];
+    const cleanedPokemon = cleanData(data);
+    return [cleanedPokemon];
   } catch (error) {
     // Si el Pokémon no se encuentra en la API, buscarlo en la base de datos local
+    // Agregar un comentario indicando que la búsqueda se está realizando en la API antes de buscar en la base de datos
     const pokemonFromDb = await pokemon.getName(name.toLowerCase());
     if (pokemonFromDb) {
       return [pokemonFromDb];
@@ -22,9 +21,6 @@ const getName = async (name) => {
   }
 };
 
-  
-  
-
 module.exports = {
-    getName,
-}
+  getName,
+};
