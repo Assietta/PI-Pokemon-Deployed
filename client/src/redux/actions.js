@@ -5,6 +5,8 @@ export const GET_TYPES = 'GET_TYPES'
 export const GET_ID = 'GET_ID'
 export const GET_NAME = 'GET_NAME'
 export const POST_POKEMON = 'POST_POKEMON'
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE'
+export const FILTER_BY_CREATED = 'FILTER_BY_CREATED'
 
 export function getPokemons(){
     return async function (dispatch){
@@ -85,3 +87,42 @@ export function postPokemon(pokemonData){
     }
 }
 
+export function filterPokemons(type, isDB) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get("http://localhost:3001/pokemon");
+        let filteredPokemons = response.data.filter((pokemon) => {
+          let matchType = false;
+          let matchDB = false;
+          if (type === "" || pokemon.tipos.includes(type)) {
+            matchType = true;
+          }
+          if (isDB === null || pokemon.isDB === isDB) {
+            matchDB = true;
+          }
+          return matchType && matchDB;
+        });
+        dispatch({
+          type: GET_POKEMONS,
+          payload: filteredPokemons,
+        });
+      } catch (error) {
+        console.error("Error while filtering pokemons:", error);
+      }
+    };
+  }
+
+  export function filterByType(type) {
+    return {
+      type: FILTER_BY_TYPE,
+      payload: type
+    }
+  }
+
+  export function filterByCreated(isDB) {
+    return {
+      type: FILTER_BY_CREATED,
+      payload: isDB
+    }
+  }
+  

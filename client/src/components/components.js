@@ -1,5 +1,5 @@
 import SearchBar from './SearchBar/SearchBar'
+import Filter from './Filters/Filter';
 
 
-
-export default SearchBar;
+export { SearchBar, Filter};

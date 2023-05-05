@@ -1,4 +1,4 @@
-import { GET_POKEMONS, GET_TYPES, GET_ID, GET_NAME, POST_POKEMON } from "./actions";
+import { GET_POKEMONS, GET_TYPES, GET_ID, GET_NAME, POST_POKEMON, FILTER_BY_TYPE, FILTER_BY_CREATED } from "./actions";
 
 const initialState = {
     pokemons: [],
@@ -29,6 +29,18 @@ const initialState = {
           return {...state,
             pokemons: action.payload,
               };
+        case FILTER_BY_TYPE:
+          const pokemonsByType = state.pokemons.filter(pokemon => pokemon.tipos.includes(action.payload))
+          return {
+            ...state,
+            pokemons: pokemonsByType
+          }
+        case FILTER_BY_CREATED:
+          const pokemonsByCreated = state.pokemons.filter(pokemon => pokemon.isDB === action.payload)
+          return {
+            ...state,
+            pokemons: pokemonsByCreated
+          }
         default:
               return { ...state };
       }
