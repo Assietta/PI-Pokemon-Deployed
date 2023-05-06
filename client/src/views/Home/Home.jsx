@@ -3,7 +3,7 @@ import Cards from "../../components/Cards/Cards";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getPokemons, getTypes } from "../../redux/actions";
-import { SearchBar, Filter, Sorter} from "../../components/components";
+import { SearchBar, Filter, Sorter, FilterDB} from "../../components/components";
 
 
 const Home = () => {
@@ -27,6 +27,7 @@ const Home = () => {
           <SearchBar />
         </div>
         <div className={style.filter}>
+          <FilterDB/>
           <Filter />
         </div>
         <div>
