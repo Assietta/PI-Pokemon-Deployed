@@ -30,11 +30,15 @@ const initialState = {
             pokemons: action.payload,
               };
         case FILTER_BY_TYPE:
-          const pokemonsByType = state.pokemons.filter(pokemon => pokemon.tipos.includes(action.payload))
-          return {
-            ...state,
-            pokemons: pokemonsByType
-          }
+          const selectedTypes = action.payload;
+          const filteredPokemons = state.pokemons.filter(pokemon => {
+          return selectedTypes.every(type => pokemon.tipos.includes(type));
+                });
+                return {
+                  ...state,
+                  pokemons: filteredPokemons
+                }
+              
         case FILTER_BY_CREATED:
           const pokemonsByCreated = state.pokemons.filter(pokemon => pokemon.isDB === action.payload)
           return {

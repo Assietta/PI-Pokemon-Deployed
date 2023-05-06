@@ -1,58 +1,62 @@
-import { getTypes } from '../../redux/actions';
+import { filterByCreated, filterByType } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 
-const Filter = ({ setFilters }) => {
-    const dispatch = useDispatch();
-  const types = useSelector((state) => state.types);
-  const [input, setInput] = useState({
-    tipos: [],
-    origen: "",
-  });
+const Filter = () => {
+  const dispatch = useDispatch();
+  const [isDB, setIsDB] = useState("");
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [selectedCount, setSelectedCount] = useState(0);
+
+  const types = useSelector((state) => state.types)
 
   useEffect(() => {
-    dispatch(getTypes());
-  }, [dispatch]);
+    if (isDB !== '') {
+      console.log(isDB)
+      dispatch(filterByCreated(isDB));
+    }
+  }, [isDB, dispatch]);
 
-  const handleTypeChange = (e) => {
-    const type = e.target.value;
-    const checked = e.target.checked;
+  useEffect(() => {
+    if (selectedTypes.length > 0) {
+      console.log(selectedTypes)
+      dispatch(filterByType(selectedTypes));
+    }
+  }, [selectedTypes, dispatch]);
 
-    setInput((prevInput) => ({
-      ...prevInput,
-      tipos: checked
-        ? [...prevInput.tipos, type]
-        : prevInput.tipos.filter((t) => t !== type),
-    }));
+  const handleOrigenChange = (event) => {
+    setIsDB(event.target.value === "true");
   };
 
-  const handleOrigenChange = (e) => {
-    const origen = e.target.value;
-    setInput((prevInput) => ({
-      ...prevInput,
-      origen: origen,
-    }));
+  const handleTypeChange = (event) => {
+    const value = event.target.value;
+    const isChecked = event.target.checked;
+    const count = isChecked ? selectedCount + 1 : selectedCount - 1;
+  
+    if (count <= 2) {
+      setSelectedCount(count);
+  
+      if (isChecked) {
+        setSelectedTypes([...selectedTypes, value]);
+      } else {
+        setSelectedTypes(selectedTypes.filter((type) => type !== value));
+      }
+    } else {
+      event.preventDefault();
+    }
   };
-
-  const applyFilters = () => {
-    setFilters(input);
-  };
-
-  const clearFilters = () => {
-    setInput({ tipos: [], origen: "" });
-    setFilters({ tipos: [], origen: "" });
-  };
-
+  
+  
   return (
     <div>
-      <h3>Filter</h3>
+      <h3>Filter by isDB</h3>
       <div>
         <label>
           <input
             type="radio"
             name="origen"
-            value="API"
-            checked={input.origen === "API"}
+            value="true"
+            checked={isDB === true}
             onChange={handleOrigenChange}
           />
           API
@@ -61,31 +65,28 @@ const Filter = ({ setFilters }) => {
           <input
             type="radio"
             name="origen"
-            value="Database"
-            checked={input.origen === "Database"}
+            value="false"
+            checked={isDB === false}
             onChange={handleOrigenChange}
           />
           Database
         </label>
       </div>
+      <h3>Filter by Type:</h3>
       <div>
-        {types.map((type) => (
-          <label key={type}>
-            <input
-              type="checkbox"
-              name="type"
-              value={type}
-              checked={input.tipos.includes(type)}
-              onChange={handleTypeChange}
-            />
-            {type.charAt(0).toUpperCase() + type.slice(1)}
-          </label>
-        ))}
-      </div>
-      <div>
-        <button onClick={applyFilters}>Apply filters</button>
-        <button onClick={clearFilters}>Clear filters</button>
-      </div>
+         {types.map((type) => (
+           <label key={type}>
+             <input
+               type="checkbox"
+               name="type"
+               value={type}
+               checked={selectedTypes.includes(type)}
+               onChange={handleTypeChange}
+             />
+             {type.charAt(0).toUpperCase() + type.slice(1)}
+           </label>
+         ))}
+       </div>
     </div>
   );
 };

@@ -10,8 +10,13 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPokemons(), getTypes());
+    const fetchData = async () => {
+      await dispatch(getPokemons());
+      await dispatch(getTypes());
+    }
+    fetchData();
   }, [dispatch]);
+  
 
   return (
     <>
