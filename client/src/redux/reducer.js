@@ -29,15 +29,23 @@ const initialState = {
           return {...state,
             pokemons: action.payload,
               };
-        case FILTER_BY_TYPE:
-          const selectedTypes = action.payload;
-          const filteredPokemons = state.pokemons.filter(pokemon => {
-          return selectedTypes.every(type => pokemon.tipos.includes(type));
+              
+              case FILTER_BY_TYPE:
+                const selectedTypes = action.payload;
+                const filteredPokemons = state.pokemons.filter(pokemon => {
+                  // Si no hay tipos seleccionados, no se filtra nada
+                  if (selectedTypes.length === 0) {
+                    return true;
+                  }
+                  // Si hay al menos un tipo seleccionado, se filtra según esos tipos
+                  return selectedTypes.every(type => pokemon.tipos.includes(type));
                 });
                 return {
                   ...state,
                   pokemons: filteredPokemons
                 }
+
+              
               
         case FILTER_BY_CREATED:
           const pokemonsByCreated = state.pokemons.filter(pokemon => pokemon.isDB === action.payload)
