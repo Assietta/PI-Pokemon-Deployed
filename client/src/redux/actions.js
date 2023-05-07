@@ -7,6 +7,9 @@ export const GET_NAME = 'GET_NAME'
 export const POST_POKEMON = 'POST_POKEMON'
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE'
 export const FILTER_BY_CREATED = 'FILTER_BY_CREATED'
+export const ORDER_BY_NAME = 'ORDER_BY_NAME'
+export const ORDER_BY_ATAQUE = 'ORDER_BY_ATAQUE'
+
 
 export function getPokemons(){
     return async function (dispatch){
@@ -113,3 +116,18 @@ export const filterByType = (selectedTypes) => {
     }
   }
   
+  export function sortByName(payload){
+    console.log(payload);
+    return {
+        type: ORDER_BY_NAME,
+        payload
+    }
+}
+
+export function sortByAtaque(payload){
+    console.log(payload);
+    return {
+        type: ORDER_BY_ATAQUE,
+        payload
+    }
+}

@@ -1,36 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from "react-redux";
+import { sortByName, sortByAtaque } from "../../redux/actions";
 
-function Sorter({ data, setData }) {
-  const handleSort = (e) => {
-    const value = e.target.value;
-    const sortedData = [...data].sort((a, b) => {
-      if (value === "name_asc") {
-        return a.name.localeCompare(b.name);
-      } else if (value === "name_desc") {
-        return b.name.localeCompare(a.name);
-      } else if (value === "attack_asc") {
-        return a.ataque - b.ataque;
-      } else if (value === "attack_desc") {
-        return b.ataque - a.ataque;
-      } else {
-        return null;
-      }
-    });
-    setData(sortedData);
-  };
+export default function Sorter(){
+    const dispatch = useDispatch();
+    const [selectedValue, setSelectedValue] = useState('');
+      
+    useEffect(() => {
+        if (selectedValue === 'asc' || selectedValue === 'desc') {
+            dispatch(sortByName(selectedValue));
+        }
+    }, [selectedValue]);
 
-  return (
-    <div>
-      <label htmlFor="sort-by">Ordenar por:</label>
-      <select id="sort-by" onChange={handleSort}>
-        <option value="">Selecciona una opción</option>
-        <option value="name_asc">Nombre (A-Z)</option>
-        <option value="name_desc">Nombre (Z-A)</option>
-        <option value="attack_asc">Ataque (menor a mayor)</option>
-        <option value="attack_desc">Ataque (mayor a menor)</option>
-      </select>
-    </div>
-  );
+    function handlerSort(e){
+		e.preventDefault();
+		dispatch(sortByName(e.target.value));
+	}
+
+    function handlerSort2(e){
+		e.preventDefault();
+		dispatch(sortByAtaque(e.target.value));
+	}
+
+    return (
+        <>
+            <select onChange={handlerSort} name="" id=""> 
+                    <option hidden>Ordenar Alfabeticamente:</option>
+                        <option value="asc">A-Z</option>
+                        <option value="desc">Z-A</option>
+            </select>
+            <select onChange={handlerSort2} name="" id=""> 
+                    <option hidden> Ordenar Por Ataque:</option>
+                        <option value="ataquemax">Ataque Max</option>
+                        <option value="ataquemin">Ataque Min</option>
+            </select>
+        </>
+    )
 }
 
-export default Sorter;

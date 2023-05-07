@@ -6,6 +6,8 @@ import {
   POST_POKEMON,
   FILTER_BY_TYPE,
   FILTER_BY_CREATED,
+  ORDER_BY_NAME,  
+  ORDER_BY_ATAQUE,
 } from "./actions";
 
 const initialState = {
@@ -59,14 +61,65 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTER_BY_TYPE:
       return filterPokemons(state, action);
+      
     case FILTER_BY_CREATED:
       const pokemonsByCreated = state.allPokemons.filter(
         (pokemon) => pokemon.isDB === action.payload
       );
+      
       return {
         ...state,
         pokemons: pokemonsByCreated,
       };
+      
+      case ORDER_BY_NAME:
+        let sortedArr = action.payload === 'asc' ?
+          state.pokemons.sort(function (a, b){
+            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+              return 1;
+            }
+            if (b.name.toLowerCase() > a.name.toLowerCase()) {
+              return -1;
+            }
+            return 0
+          }) :
+          state.pokemons.sort(function(a,b){
+            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+              return -1;
+            }
+            if (b.name.toLowerCase() > a.name.toLowerCase()) {
+              return 1;
+            }
+            return 0
+          })
+        return{
+          ...state,
+          pokemons: sortedArr
+        }
+
+        case ORDER_BY_ATAQUE:
+          if (state.pokemons) { 
+            const sortedPokemons = action.payload === 'ataquemax'
+            ? state.pokemons.sort((a, b) => {
+                if (isNaN(a.ataque) || isNaN(b.ataque)) return -1;
+                if (parseInt(a.ataque) > parseInt(b.ataque)) return 1;
+                if (parseInt(a.ataque) < parseInt(b.ataque)) return -1;
+                return 0;
+              })
+            : state.pokemons.sort((a, b) => {
+                if (isNaN(a.ataque) || isNaN(b.ataque)) return -1;
+                if (parseInt(a.ataque) > parseInt(b.ataque)) return -1;
+                if (parseInt(a.ataque) < parseInt(b.ataque)) return 1;
+                return 0;
+              });
+
+            return {
+              ...state,
+              pokemons: sortedPokemons
+            };
+          } else {
+            return state;
+          }
     default:
       return { ...state };
   }
