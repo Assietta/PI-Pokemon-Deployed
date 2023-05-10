@@ -98,7 +98,7 @@ const Form = () => {
           <input value={input.peso} type="number" id="peso" name="peso" min="0" max="1000" onChange={handleInputChange} />
         
           <label htmlFor="type">Tipo(s):</label>
-            <div className={style.type}>
+            <div className={style.checktipes}>
               {types.map((type) => (
                 <label key={type}>
                   <input type="checkbox" name="type" value={type} checked={input.tipos.includes(type)} onChange={handleTypeChange} />
@@ -129,8 +129,37 @@ const Form = () => {
 
                 </div>
             </div>
-        </div>
 
+        <div className={style.back}>
+                  <div className={style.stats}>
+                     <div className={style.stat}>
+                        <span className={style.statName}>Vida:</span>
+                        <span className={style.statValue}>{input.vida}</span>
+                     </div>
+                     <div className={style.stat}>
+                        <span className={style.statName}>Ataque:</span>
+                        <span className={style.statValue}>{input.ataque}</span>
+                     </div>
+                     <div className={style.stat}>
+                        <span className={style.statName}>Defensa:</span>
+                        <span className={style.statValue}>{input.defensa}</span>
+                     </div>
+                     <div className={style.stat}>
+                        <span className={style.statName}>Velocidad:</span>
+                        <span className={style.statValue}>{input.velocidad}</span>
+                     </div>
+                     <div className={style.stat}>
+                        <span className={style.statName}>Altura:</span>
+                        <span className={style.statValue}>{input.altura}</span>
+                     </div>
+                     <div className={style.stat}>
+                        <span className={style.statName}>Peso:</span>
+                        <span className={style.statValue}>{input.peso}</span>
+                     </div>
+                  </div>
+               </div>
+
+        </div>
       </div>
     </>
     );
