@@ -23,15 +23,19 @@ const Home = () => {
     <>
       <div >
       <div className={style.container}>
-        <div>
-          <SearchBar />
-        </div>
-        <div className={style.filter}>
-          <FilterDB/>
-          <Filter />
-        </div>
         <div className={style.sorter}>
           <Sorter />
+        </div>
+        <div className={style.filter}>
+          <div className={style.filterdb}>
+            <FilterDB/>
+          </div>
+          <div className={style.filtertipos}>
+            <Filter />
+          </div>
+        </div>
+        <div className={style.search}>
+          <SearchBar />
         </div>
       </div >
         {loading ? (

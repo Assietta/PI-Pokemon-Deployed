@@ -15,23 +15,20 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: aliceblue;
+    background-color: yellow;
   }
   
   .search-bar {
+    margin-top: 50px;
     flex-grow: 1;
     background-color: aliceblue;
   }
   
   .filter {
-    flex-grow: 2;
+    display: flex;
     background-color: aliceblue;
   }
   
-  .sorter {
-    flex-grow: 1;
-    background-color: aliceblue;
-  }
   
  
   
@@ -43,4 +40,13 @@
 
   .textogif {
     margin-left: 860px;
+  }
+
+  .filterdb {
+    min-width: 20%;
+    background-color: yellow;
+  }
+
+  .filtertipos {
+   background-color: yellow;
   }

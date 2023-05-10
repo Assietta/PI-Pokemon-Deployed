@@ -1,6 +1,7 @@
 import { filterByCreated } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
+import style from './Filters.module.css'
 
 const FilterDB = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,9 @@ const FilterDB = () => {
   
   return (
     <div>
-      <h3>Filter by isDB</h3>
+      <h3 className={style.texto}>FILTER BY ISDB:</h3>
       <div>
-        <label>
+        <label className={style.texto1}>
           <input
             type="radio"
             name="origen"
@@ -32,7 +33,7 @@ const FilterDB = () => {
           />
           API
         </label>
-        <label>
+        <label className={style.texto2}>
           <input
             type="radio"
             name="origen"

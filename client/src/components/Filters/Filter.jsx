@@ -1,6 +1,7 @@
 import { filterByType } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
+import style from './Filters.module.css'
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -39,10 +40,10 @@ const Filter = () => {
   
   return (
     <div>
-      <h3>Filter by Type:</h3>
-      <div>
+      <h3 className={style.texto3}>FILTER BY TYPE:</h3>
+      <div className={style.tipos}>
          {types.map((type) => (
-           <label key={type}>
+           <label key={type} className={style.checkboxes}>
              <input
                type="checkbox"
                name="type"
@@ -50,7 +51,7 @@ const Filter = () => {
                checked={selectedTypes.includes(type)}
                onChange={handleTypeChange}
              />
-             {type.charAt(0).toUpperCase() + type.slice(1)}
+             <span className={style.checkboxText}>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
            </label>
          ))}
        </div>

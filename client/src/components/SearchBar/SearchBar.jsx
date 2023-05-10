@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getName } from "../../redux/actions";
+import { getName, getPokemons } from "../../redux/actions";
+import styles from "./SearchBar.module.css";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,8 @@ const SearchBar = () => {
   useEffect(() => {
     if (name) {
       dispatch(getName(name));
+    } else {
+      dispatch(getPokemons());
     }
   }, [name, dispatch]);
 
@@ -23,14 +26,12 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      <input type="text" value={name} onChange={handleInputChange} />
-      <button type="submit">Search</button>
-      {pokemons &&
-        pokemons.name &&
-        <div>
+    <form className={styles.searchBar} onSubmit={handleSearch}>
+      <input className={styles.input} type="text" value={name} onChange={handleInputChange} placeholder="Search Pokemon..." />
+      {pokemons && pokemons.name &&
+        <div className={styles.result}>
           <h3>{pokemons.name}</h3>
-          <img src={pokemons.img} alt={pokemons.name} />
+          <img className={styles.image} src={pokemons.img} alt={pokemons.name} />
         </div>
       }
     </form>

@@ -20,7 +20,7 @@ export default function Cards() {
    }
 
    return (
-      <div>
+      <div >
       <div className={style.cards}>
          {
             currentpokemons.map(({ id, name, vida, ataque, defensa, velocidad, altura, peso, tipos, isDB, imagen}) => {
@@ -41,7 +41,7 @@ export default function Cards() {
             })
          }
       </div>
-      <div>
+      <div >
          <div className={style.center}>
             <Paginado
                   className='paginado'

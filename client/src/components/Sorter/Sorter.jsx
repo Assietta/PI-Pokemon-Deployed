@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { sortByName, sortByAtaque } from "../../redux/actions";
+import style from './Sorter.module.css';
 
 export default function Sorter(){
     const dispatch = useDispatch();
@@ -24,17 +25,16 @@ export default function Sorter(){
 
     return (
         <>
-            <select onChange={handlerSort} name="" id=""> 
+            <select onChange={handlerSort} name="" id="" className={style.sortSelect}> 
                     <option hidden>Ordenar Alfabeticamente:</option>
-                        <option value="asc">A-Z</option>
-                        <option value="desc">Z-A</option>
+                        <option value="asc" className={style.sortOption}>A-Z</option>
+                        <option value="desc" className={style.sortOption}>Z-A</option>
             </select>
-            <select onChange={handlerSort2} name="" id=""> 
+            <select onChange={handlerSort2} name="" id="" className={style.sortSelect}> 
                     <option hidden> Ordenar Por Ataque:</option>
-                        <option value="ataquemax">Ataque Max</option>
-                        <option value="ataquemin">Ataque Min</option>
+                        <option value="ataquemin" className={style.sortOption}>Ataque Max</option>
+                        <option value="ataquemax" className={style.sortOption}>Ataque Min</option>
             </select>
         </>
     )
 }
-
