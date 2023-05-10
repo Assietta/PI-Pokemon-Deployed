@@ -18,13 +18,20 @@ const Detail = () => {
         
         return (
             <div className={style.pokemondetail}>
+                <h1>Id: {pokemon.id}</h1>
             <h2>{pokemon.name}</h2>
+            <img src={pokemon.imagen} alt={pokemon.name} />
             <p>HP: {pokemon.vida}</p>
             <p>Attack: {pokemon.ataque}</p>
             <p>Defense: {pokemon.defensa}</p>
             <p>Speed: {pokemon.velocidad}</p>
             <p>Height: {pokemon.altura}</p>
             <p>Weight: {pokemon.peso}</p>
+            <div className={style.types}>
+               {pokemon.tipos.map((tipo) => (
+                  <span key={tipo} className={style.tipo}>{tipo}</span>
+                  ))}
+            </div>
         </div>       
     )
     }
