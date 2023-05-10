@@ -1,10 +1,15 @@
+@font-face {
+  font-family: "Pokemon Classic";
+  src: url("../../font/Pokemon\ Classic.ttf");
+}
+
 .navlist {
     display: flex;
     justify-content: space-between;
     list-style: none;
     padding: 0;
     margin: 0;
-    background-color: #333;
+    background-color: red;
   }
   
   .navlist li {
@@ -19,10 +24,40 @@
   }
   
   .navlist li a:hover {
-    background-color: #555;
+    background-color: lightcoral;
   }
   
   .active {
-    background-color: #666;
+    background-color: lightcoral;
+  }
+  
+  .logo{
+    max-width: 50px;
+    max-height: 50px;
+    margin-left: 10px;
+  }
+
+  .landing {
+    margin-right: 1200px;
+  }
+
+  .div {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 250px;
+  }
+
+
+  .home { 
+  font-family: "Pokemon Classic", sans-serif;
+  margin-right: 50px;
+  }
+
+  .form {
+    font-family: "Pokemon Classic", sans-serif;
+  }
+
+  .active {
+    border-bottom: 2px solid violet;
   }
   
