@@ -75,11 +75,21 @@ const Form = () => {
           <label htmlFor="name">Nombre:</label>
           <input value={input.name} type="text" id="name" name="name" required onChange={handleInputChange} />
   
-          <label htmlFor="imagen">
-            Imagen:
-            <input value={input.imagen} type="url" id="imagen" name="imagen" required onChange={handleInputChange} />
-            {input.imagen && <img src={input.imagen} alt="Imagen del Pokemon" id="imagen-preview" onLoad={(e) => e.target.style.maxWidth = `${e.target.parentElement.offsetWidth - 150}px`} />}
-          </label>
+          <div className={style.imageInput}>
+  <label htmlFor="imagen">Imagen:</label>
+  <input value={input.imagen} type="url" id="imagen" name="imagen" required onChange={handleInputChange} />
+  <div className={style.imagencontainer}>
+    {input.imagen && (
+      <img
+        src={input.imagen}
+        alt="Imagen del Pokemon"
+        id="imagen-preview"
+        onLoad={(e) => (e.target.style.maxWidth = `${e.target.parentElement.offsetWidth - 150}px`)}
+      />
+    )}
+</div>
+  </div>
+
 
 
         
