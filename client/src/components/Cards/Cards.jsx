@@ -42,13 +42,15 @@ export default function Cards() {
          }
       </div>
       <div>
-         <Paginado
-               className='paginado'
-               pokemonsPerPage={pokemonsPerPage}
-               totalPokemons={pokemons.length}
-               paginado={paginado}
-               currentPage={currentPage}
-         />
+         <div className={style.center}>
+            <Paginado
+                  className='paginado'
+                  pokemonsPerPage={pokemonsPerPage}
+                  totalPokemons={pokemons.length}
+                  paginado={paginado}
+                  currentPage={currentPage}
+            />
+         </div>
       </div>
       </div>
    )

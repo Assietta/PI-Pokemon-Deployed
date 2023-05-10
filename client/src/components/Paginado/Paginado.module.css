@@ -35,6 +35,9 @@
   }
   
 .span {
-    font-size: 16px;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    color: white;
+    padding-right: 10px;
   }
   
