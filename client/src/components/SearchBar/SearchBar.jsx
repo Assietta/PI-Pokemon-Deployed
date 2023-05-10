@@ -17,7 +17,10 @@ const SearchBar = () => {
   }, [name, dispatch]);
 
   const handleInputChange = (event) => {
-    setName(event.target.value);
+    const inputValue = event.target.value;
+    if (!/^\d+$/.test(inputValue)) {
+      setName(inputValue);
+    }
   };
 
   const handleSearch = (event) => {

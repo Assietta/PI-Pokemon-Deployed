@@ -44,6 +44,11 @@ const Form = () => {
   const handleTypeChange = (event) => {
     const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked')).map((input) => input.value);
 
+
+    if (!input.name.trim()) {
+      alert('Ingrese un nombre válido');
+      return;
+    }
     if (selectedtype.length >= 2) {
       document.querySelectorAll('input[name=type]:not(:checked)').forEach((input) => {
         input.disabled = true;
