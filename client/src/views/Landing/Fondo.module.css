@@ -1,0 +1,7 @@
+.landing {
+  background-image: url(./components/FondoLanding.png);
+  background-position: center;
+  background-size: contain;
+  padding-top: 1px;
+  padding-bottom: 126px;
+}

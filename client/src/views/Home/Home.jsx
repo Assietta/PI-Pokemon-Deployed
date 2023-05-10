@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div >
 
       <div className={style.container}>
         <div>
@@ -30,12 +30,15 @@ const Home = () => {
           <FilterDB/>
           <Filter />
         </div>
-        <div>
+        <div className={style.sorter}>
           <Sorter />
         </div>
+      </div >
+      <div className={style.fondo}>
+        <div className={style.acomodo}>
+          <Cards  />
+        </div>
       </div>
-
-        <Cards />
       </div>
     </>
   );
