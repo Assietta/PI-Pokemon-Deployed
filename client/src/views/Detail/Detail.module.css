@@ -15,3 +15,34 @@
     font-size: 1.2rem;
     color: #4a5568;
 }
+
+.types {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .tipo {
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .div1 {
+    width: 50%;
+  }
+  
+  .div2 {
+    width: 40%;
+  }
+  
