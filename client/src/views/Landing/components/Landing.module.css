@@ -62,3 +62,10 @@ html, body {
     background-color: #FFDE4B;
   }
   
+  .link {
+    text-decoration: underline;
+    color: #666;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  
