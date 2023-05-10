@@ -71,28 +71,14 @@ const Form = () => {
       
   return (
     <>
+    <div className={style.newpokemoncontainer}>
       <form id="new-pokemon-form" className={style.newpokemonform} onSubmit={handleSubmit}>
           <label htmlFor="name">Nombre:</label>
           <input value={input.name} type="text" id="name" name="name" required onChange={handleInputChange} />
   
-          <div className={style.imageInput}>
-  <label htmlFor="imagen">Imagen:</label>
-  <input value={input.imagen} type="url" id="imagen" name="imagen" required onChange={handleInputChange} />
-  <div className={style.imagencontainer}>
-    {input.imagen && (
-      <img
-        src={input.imagen}
-        alt="Imagen del Pokemon"
-        id="imagen-preview"
-        onLoad={(e) => (e.target.style.maxWidth = `${e.target.parentElement.offsetWidth - 150}px`)}
-      />
-    )}
-</div>
-  </div>
+          <label htmlFor="imagen">Imagen:</label>
+          <input value={input.imagen} type="url" id="imagen" name="imagen" required onChange={handleInputChange} />
 
-
-
-        
           <label htmlFor="vida">Vida:</label>
           <input value={input.vida} type="number" id="vida" name="vida" min="0" max="100" required onChange={handleInputChange} />
     
@@ -124,6 +110,28 @@ const Form = () => {
     
           <button type="submit" id="submit-button">Crear Pokemon</button>
       </form>
+
+      <div className={style.card}>
+
+         <div className={style.front}>
+                <div className={style.imageContainer}>
+                  <img 
+                      src={input.imagen} 
+                      alt={input.imagen} 
+                      className={style.image} 
+                      />
+                </div>
+                <h2 className={style.name}>{input.name}</h2>
+                <div className={style.types}>
+                  {input.tipos.map((tipo) => (
+                    <span key={tipo} className={style.tipo}>{tipo}</span>
+                  ))}
+
+                </div>
+            </div>
+        </div>
+
+      </div>
     </>
     );
   };
