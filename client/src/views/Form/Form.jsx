@@ -1,11 +1,12 @@
 import style from './Form.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { postPokemon, getTypes } from '../../redux/actions';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Form = () => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
+  const formRef = useRef(null);
 
   const [input, setInput] = useState({
     name: '',
@@ -39,7 +40,21 @@ const Form = () => {
     };
     dispatch(postPokemon(pokemonData));
     console.log(pokemonData);
+    
+    formRef.current.reset(); // Restablecer el formulario
+    setInput({
+      name: '',
+      imagen: '',
+      vida: 0,
+      ataque: 0,
+      defensa: 0,
+      velocidad: 0,
+      altura: 0,
+      peso: 0,
+      tipos: ['', ''],
+    }); // Restablecer los valores del estado
   };
+  
 
   const handleTypeChange = (event) => {
     const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked')).map((input) => input.value);
@@ -77,7 +92,7 @@ const Form = () => {
   return (
     <>
     <div className={style.newpokemoncontainer}>
-      <form id="new-pokemon-form" className={style.newpokemonform} onSubmit={handleSubmit}>
+      <form id="new-pokemon-form" ref={formRef} className={style.newpokemonform} onSubmit={handleSubmit}>
           <label htmlFor="name">Nombre:</label>
           <input value={input.name} type="text" id="name" name="name" required onChange={handleInputChange} />
   
