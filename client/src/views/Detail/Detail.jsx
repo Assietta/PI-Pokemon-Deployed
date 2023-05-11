@@ -12,7 +12,7 @@ const Detail = () => {
     useEffect(() => {
         dispatch(getID(id));
         console.log(pokemon);
-    }, []);
+    }, [dispatch, id, pokemon]);
 
     if ( typeof (pokemon) === 'object' ) {
         

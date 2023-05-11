@@ -1,16 +1,15 @@
 import Card from '../Card/Card.jsx';
 import style from './Cards.module.css'
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import Paginado from '../Paginado/paginado.jsx';
 import { useState } from 'react';
 
 
 export default function Cards() {
-   const dispatch = useDispatch();
    const pokemons = useSelector(state => state.pokemons);
 
    const [currentPage, setCurrentPage] = useState(1)
-   const [pokemonsPerPage, setpokemonsPerPage] = useState(12)
+   const [pokemonsPerPage] = useState(12)
    const indexOfLastPokemon = currentPage * pokemonsPerPage
    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage
    const currentpokemons = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)

@@ -56,29 +56,29 @@ const Form = () => {
   };
   
 
-  const handleTypeChange = (event) => {
-    const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked')).map((input) => input.value);
+const handleTypeChange = (event) => {
+  const selectedtype = Array.from(document.querySelectorAll('input[name=type]:checked')).map((input) => input.value);
 
-
-    if (!input.name.trim()) {
-      alert('Ingrese un nombre válido');
-      return;
-    }
-    if (selectedtype.length >= 2) {
-      document.querySelectorAll('input[name=type]:not(:checked)').forEach((input) => {
-        input.disabled = true;
-      });
-    } else {
-      document.querySelectorAll('input[name=type]:not(:checked)').forEach((input) => {
-        input.disabled = false;
-      });
-    }
-
-    setInput({
-      ...input,
-      tipos: selectedtype,
+  if (!input.name.trim()) {
+    alert('Ingrese un nombre válido');
+    return;
+  }
+  if (selectedtype.length >= 2) {
+    document.querySelectorAll('input[name=type]:not(:checked)').forEach((input) => {
+      input.disabled = true;
     });
-  };
+  } else {
+    document.querySelectorAll('input[name=type]:not(:checked)').forEach((input) => {
+      input.disabled = false;
+    });
+  }
+
+  setInput({
+    ...input,
+    tipos: selectedtype,
+  });
+};
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

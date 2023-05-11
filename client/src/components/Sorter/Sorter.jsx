@@ -5,13 +5,13 @@ import style from './Sorter.module.css';
 
 export default function Sorter(){
     const dispatch = useDispatch();
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedValue] = useState('');
       
     useEffect(() => {
         if (selectedValue === 'asc' || selectedValue === 'desc') {
             dispatch(sortByName(selectedValue));
         }
-    }, [selectedValue]);
+    }, [dispatch, selectedValue]);
 
     function handlerSort(e){
 		e.preventDefault();
