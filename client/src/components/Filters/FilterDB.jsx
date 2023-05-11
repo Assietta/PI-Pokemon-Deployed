@@ -21,7 +21,7 @@ const FilterDB = () => {
   
   return (
     <div>
-      <h3 className={style.texto}>FILTER BY ISDB:</h3>
+      <h3 className={style.texto}>FILTRAR POR DB:</h3>
       <div>
         <label className={style.texto1}>
           <input

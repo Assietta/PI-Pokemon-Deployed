@@ -30,7 +30,7 @@ const SearchBar = () => {
 
   return (
     <form className={styles.searchBar} onSubmit={handleSearch}>
-      <input className={styles.input} type="text" value={name} onChange={handleInputChange} placeholder="Search Pokemon..." />
+      <input className={styles.input} type="text" value={name} onChange={handleInputChange} placeholder="Buscar Pokemon..." />
       {pokemons && pokemons.name &&
         <div className={styles.result}>
           <h3>{pokemons.name}</h3>
