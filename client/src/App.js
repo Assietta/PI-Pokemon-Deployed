@@ -1,6 +1,9 @@
 import { Home, Detail, Form, LandingPage } from "./views/index"
 import { Route, Routes, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
+import axios from "axios";
+axios.defaults.baseURL = 'https://pi-pokemon-production-799f.up.railway.app/';
+
 
 function App() {
   const { pathname } = useLocation();
